@@ -5,11 +5,14 @@ public class Main_Runner {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         ArrayList<User> accounts = new ArrayList<>();
-        accounts.add(new Rushee("Julian Chat", "juc226@lehigh.edu","password",1,"Phi Delt", "I am cool",null));
-        accounts.add(new Frat("Phi Delt", "ank726@lehigh.edu","pass",null, null, "We are cool"));
-        accounts.add(new Rushee("Andrew Todaro","apt226@lehigh.edu","bob",1,"Theta Chi","Academic Weapon",null));
-        accounts.add(new Frat("Theta Chi","ekg226@lehigh.edu","password1",null,null,"Theta Chi rules"));
-        accounts.add(new Rushee("Daniel In","dai226@lehigh.edu","weightLifter",1,"D Chi","Swagger",null));
+        ArrayList<String> temp1 = new ArrayList<>();
+        ArrayList<String> temp2 = new ArrayList<>();
+
+        accounts.add(new Rushee("Julian Chat", "juc226@lehigh.edu","password",1,"Phi Delt", "I am cool",temp1));
+        accounts.add(new Frat("Phi Delt", "ank726@lehigh.edu","pass",temp1, temp2, "We are cool"));
+        accounts.add(new Rushee("Andrew Todaro","apt226@lehigh.edu","bob",1,"Theta Chi","Academic Weapon",temp1));
+        accounts.add(new Frat("Theta Chi","ekg226@lehigh.edu","password1",temp1,temp2,"Theta Chi rules"));
+        accounts.add(new Rushee("Daniel In","dai226@lehigh.edu","weightLifter",1,"D Chi","Swagger",temp1));
         User users = null;
         boolean looping = true;
         while (looping) { // log in
@@ -45,9 +48,15 @@ public class Main_Runner {
         }
 
         if (users instanceof Rushee) {
-            rushing(scan, users);
+            while (true) {
+                rushing(scan, users);
+            }
+            
         } else {
-            frating(users, scan, accounts);
+            while(true) {
+                frating(users, scan, accounts);
+            }
+            
         }
     }
 
@@ -102,11 +111,11 @@ public class Main_Runner {
         return new Frat(fratName, email, password, rushees, topRushees, bio);
     }
     public static User login(Scanner scan, ArrayList<User> list) {
-        System.out.println("Enter your username");
+        System.out.println("Enter your email");
         String user = scan.nextLine();
 
         int position = findUser(list, user);
-        if (position != 1) {
+        if (position != -1) {
             boolean passwording = true;
             while(passwording) {
                 System.out.println("Enter your password");
@@ -114,6 +123,8 @@ public class Main_Runner {
                 if (pass.equals(list.get(position).getPassword())) {
                     passwording = false;
                     return list.get(position);
+                } else {
+                    System.out.println("incorrect password");
                 }
             }
             
@@ -125,11 +136,11 @@ public class Main_Runner {
     }
     public static int findUser(ArrayList<User> list, String username) throws UsernameNotFoundException {
         for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getUsername() == username) {
+            if (list.get(i).getUsername().equals(username)) {
                 return i;
             }
         }
-        throw new UsernameNotFoundException();
+        return -1;
     }
 
     public static void rushing(Scanner scan, User user) {
@@ -142,7 +153,8 @@ public class Main_Runner {
             Rushee rush = (Rushee) user;
             rush.getMessages();
         } else {
-            user.toString();
+            
+            System.out.println(user.toString());
         }
 
     }
@@ -165,7 +177,7 @@ public class Main_Runner {
                 System.out.println("Enter rushee email");
                 choice = scan.nextLine();
                 int position = findUser(list, choice);
-                if (position != 1) {
+                if (position != -1) {
                     frats.getRushees().add(choice);
                 } else {
                     System.out.println("Rushee account not found");
@@ -200,7 +212,8 @@ public class Main_Runner {
             message(choice, user, list, scan);
 
         } else {
-            user.toString();
+            System.out.println( user.toString());
+           
         }
         
 

@@ -60,7 +60,16 @@ public class Rushee {
         classYear = c;
     }
     public void setName(String n) {
-        name =n;
+        name = n;
+    }
+    public void settopBid(Frat tb){
+        topBid = tb;
+    }
+    public void setDescription(String d){
+        description = d;
+    }
+    public void setFriends(ArrayList<String> f){
+        friends = f;
     }
 
 }

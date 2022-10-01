@@ -1,26 +1,13 @@
 import java.util.ArrayList;
 
-public class Frat {
-    private String username;
-    private String password;
+public class Frat extends User {
     private ArrayList<String> rushees;
     private ArrayList<String> topRushees;
-    private String description;
 
-    public Frat(String username, String password, ArrayList<String> rushees, ArrayList<String> topRushees, String description) {
-        this.username = username;
-        this.password = password; 
+    public Frat(String fratName, String username, String password, ArrayList<String> rushees, ArrayList<String> topRushees, String description) {
+        super(username, password, description, fratName);
         this.rushees = rushees;
         this.rushees = topRushees;
-        this.description = description;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public ArrayList<String> getRushees() {
@@ -31,18 +18,6 @@ public class Frat {
         return topRushees;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setUsername(String u) {
-        username = u;
-    }
-
-    public void setPassWord(String p) {
-        password = p;
-    }
-
     public void setRushees(ArrayList<String> r) {
         rushees = r;
     }
@@ -51,7 +26,4 @@ public class Frat {
         topRushees = r;
     }
 
-    public void setDescription(String d) {
-        description = d;
-    }
 }

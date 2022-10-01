@@ -1,7 +1,7 @@
 public class User {
     private String username;
     private String password;
-    private String description;
+    protected String description;
     private String name;
 
     public User(String username, String password, String description, String name) {
@@ -39,5 +39,11 @@ public class User {
     public void setName(String n) {
         name = n;
     }
-    
+    public String toString() {
+        return "Name " + name +  ", Email " + username;
+    }
+
+    public void addMessage(String message) {
+        
+    }
 }

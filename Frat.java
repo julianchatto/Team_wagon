@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Frat extends User {
     private ArrayList<String> rushees;
@@ -26,4 +27,7 @@ public class Frat extends User {
         topRushees = r;
     }
 
+    public String toString() {
+        return "Frat " + super.toString() + "\nRushees: " + rushees + "\nTop Rushees: " + topRushees + "\nBio " + description;  
+    }
 }

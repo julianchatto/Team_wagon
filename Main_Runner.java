@@ -5,7 +5,11 @@ public class Main_Runner {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         ArrayList<User> accounts = new ArrayList<>();
-
+        accounts.add(new Rushee("Julian Chat", "juc226@lehigh.edu","password",1,"Phi Delt", "I am cool",null));
+        accounts.add(new Frat("Phi Delt", "ank726@lehigh.edu","pass",null, null, "We are cool"));
+        accounts.add(new Rushee("Andrew Todaro","apt226@lehigh.edu","bob",1,"Theta Chi","Academic Weapon",null));
+        accounts.add(new Frat("Theta Chi","ekg226@lehigh.edu","password1",null,null,"Theta Chi rules"));
+        accounts.add(new Rushee("Daniel In","dai226@lehigh.edu","weightLifter",1,"D Chi","Swagger",null));
         User users = null;
         boolean looping = true;
         while (looping) { // log in

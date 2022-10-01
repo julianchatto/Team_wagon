@@ -5,6 +5,7 @@ public class Main_Runner {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         ArrayList<User> accounts = new ArrayList<>();
+
         User users = null;
         boolean looping = true;
         while (looping) { // log in
@@ -40,7 +41,7 @@ public class Main_Runner {
         }
 
         if (users instanceof Rushee) {
-            rushing();
+            rushing(scan, users);
         } else {
             frating(users, scan, accounts);
         }
@@ -55,7 +56,7 @@ public class Main_Runner {
         int classYear = Integer.parseInt(scan.nextLine());
         System.out.println("Enter your name"); 
         String name = scan.nextLine();
-        Frat topbid = null;
+        String topbid = "";
         System.out.println("Enter a short bio");
         String bio = scan.nextLine();
         ArrayList<String> messages = null;
@@ -102,6 +103,17 @@ public class Main_Runner {
 
         int position = findUser(list, user);
         if (position != 1) {
+            boolean passwording = true;
+            while(passwording) {
+                System.out.println("Enter your password");
+                String pass = scan.nextLine();
+                if (pass.equals(list.get(position).getPassword())) {
+                    passwording = false;
+                    return list.get(position);
+                }
+            }
+            
+
             return list.get(position);
         }
         return null;
@@ -116,7 +128,18 @@ public class Main_Runner {
         throw new UsernameNotFoundException();
     }
 
-    public static void rushing() {
+    public static void rushing(Scanner scan, User user) {
+        System.out.println("Choose an option");
+        System.out.println("1. View invites");
+        System.out.println("2. View profile");
+        String option = scan.nextLine();
+
+        if (option.equals("1")) {
+            Rushee rush = (Rushee) user;
+            rush.getMessages();
+        } else {
+            user.toString();
+        }
 
     }
 
@@ -135,21 +158,37 @@ public class Main_Runner {
             choice = scan.nextLine();
 
             if (choice.equals("1")) {
-                rushSignUp(scan);
                 System.out.println("Enter rushee email");
                 choice = scan.nextLine();
-                frats.getRushees().add(choice);
+                int position = findUser(list, choice);
+                if (position != 1) {
+                    frats.getRushees().add(choice);
+                } else {
+                    System.out.println("Rushee account not found");
+                }
                 
 
             } else if (choice.equals("2")) {
+                System.out.println("Enter top rushee email");
+                choice = scan.nextLine();
+                int position = findUser(list, choice);
+                if (position != 1) {
+                    frats.getTopRushees().add(choice);
+                } else {
+                    System.out.println("Top rushee account not found");
+                }
 
             } else if (choice.equals("3")) {
-
+                System.out.println("Enter top rushee email");
+                choice = scan.nextLine();
+                removeRushees(choice, user, scan);
             } else {
-
+                System.out.println("Enter top rushee email");
+                choice = scan.nextLine();
+                removeTopRushees(choice, user, scan);
             }
 
-        } else if(choice.equals("3")) {
+        } else if(choice.equals("2")) {
             System.out.println("Choose an option");
             System.out.println("1. Message all rushees");
             System.out.println("2. Message top rushees");
@@ -163,9 +202,27 @@ public class Main_Runner {
 
     }
 
-    public static void add(String choice, User user, ArrayList<User> list, Scanner scan) {
-        
+    public static void removeRushees(String email, User user, Scanner scan) {
+        Frat frats = (Frat) user;
+        ArrayList<String> list = frats.getRushees();
+        for(int i = 0; i < list.size(); i++) {
+            if (list.get(i).equals(email)) {
+                list.remove(i);
+                break;
+            }
+        }
     }
+    public static void removeTopRushees(String email, User user, Scanner scan) {
+        Frat frats = (Frat) user;
+        ArrayList<String> list = frats.getTopRushees();
+        for(int i = 0; i < list.size(); i++) {
+            if (list.get(i).equals(email)) {
+                list.remove(i);
+                break;
+            }
+        }
+    }
+    
 
     public static void message(String choice, User user, ArrayList<User> list, Scanner scan) {
         System.out.println("Enter your message");
@@ -174,16 +231,18 @@ public class Main_Runner {
         if (choice.equals("1")) {
             for (String f : frats.getRushees()) {
                 int position = findUser(list, f);
-                list.get(position).addMessage(message);
+                list.get(position).addMessage(frats.getName() + "\n" + message);
             }
 
         } else {
             for (String f : frats.getRushees()) {
                 int position = findUser(list, f);
-                list.get(position).addMessage(message);
+                list.get(position).addMessage(frats.getName() + "\n" + message);
             }
         }
         
     }
 
+
+    
 }

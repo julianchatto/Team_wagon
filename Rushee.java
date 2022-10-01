@@ -56,5 +56,11 @@ public class Rushee {
     public void setPassword(String p){
         password = p; 
     }
+    public void setClassYear(int c) {
+        classYear = c;
+    }
+    public void setName(String n) {
+        name =n;
+    }
 
 }

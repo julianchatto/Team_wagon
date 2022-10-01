@@ -3,9 +3,9 @@ import java.util.ArrayList;
 public class Rushee extends User{
     private int classYear;
     private ArrayList<String> messages;
-    private Frat topBid;
+    private String topBid;
 
-    public Rushee(String name, String username, String password, int classYear, Frat topBid, String description, ArrayList<String> messages) {
+    public Rushee(String name, String username, String password, int classYear, String topBid, String description, ArrayList<String> messages) {
         super(username, password, description,name);
         this.classYear = classYear;
         this.topBid = topBid;
@@ -23,7 +23,7 @@ public class Rushee extends User{
         return messages;
     }
 
-    public Frat gettopBid(){
+    public String gettopBid(){
         return topBid; 
     }
 
@@ -32,7 +32,7 @@ public class Rushee extends User{
         classYear = c;
     }
 
-    public void settopBid(Frat tb){
+    public void settopBid(String tb){
         topBid = tb;
     }
     public void addMessage(String message) {

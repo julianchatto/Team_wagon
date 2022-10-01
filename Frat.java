@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Frat extends User {
     private ArrayList<String> rushees;
